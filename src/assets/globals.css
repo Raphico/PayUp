@@ -55,6 +55,30 @@
   }
 
   body {
-    @apply font-inter bg-background text-foreground;
+    @apply font-inter bg-background text-foreground min-h-screen;
+  }
+}
+
+@layer utilities {
+  .container {
+    @apply max-w-7xl mx-auto px-6;
+  }
+
+  .heading3 {
+    @apply font-bold text-xl;
+  }
+
+  .heading2 {
+    @apply font-bold text-2xl;
+  }
+
+  .heading1 {
+    @apply font-bold text-3xl;
+  }
+}
+
+@layer components {
+  .site-header {
+    @apply w-full sticky top-0 border-b py-2.5;
   }
 }
