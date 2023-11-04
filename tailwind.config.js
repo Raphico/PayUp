@@ -18,7 +18,7 @@ export default {
           foreground: "hsl(var(--accent-foreground))",
         },
         primary: {
-          DEFAULT: "hls(var(--primary))",
+          DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
