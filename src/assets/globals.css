@@ -64,6 +64,10 @@
     @apply max-w-7xl mx-auto px-6;
   }
 
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+
   .heading3 {
     @apply font-bold text-xl;
   }
