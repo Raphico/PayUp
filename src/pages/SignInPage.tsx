@@ -3,7 +3,7 @@ import { Button } from "../components/ui/Button"
 
 export function SignInPage() {
   return (
-    <main className="container py-12 sm:py-24">
+    <main className="max-width py-12 sm:py-24">
       <GoBack />
       <section className="w-full flex-center flex-col gap-10 py-12 sm:py-24">
         <div className="flex items-center gap-2">

@@ -7,7 +7,7 @@ import { ThemeToggler } from "./ThemeToggler"
 export function AuthNav() {
   return (
     <header className="site-header">
-      <nav className="container flex-between">
+      <nav className="max-width flex-between">
         <Logo />
 
         <div className="flex items-center gap-2">

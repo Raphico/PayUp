@@ -8,14 +8,14 @@ export function HomePage() {
   return (
     <>
       <AuthNav />
-      <main className="container py-12 sm:py-24">
+      <main className="max-width py-12 sm:py-24">
         <section className="hero">
           <Link
             to="https://github.com/Raphico/payUp"
             target="_blank"
-            className={cn(buttonVariants({ variant: "outline" }), "gap-2")}
+            className={cn(buttonVariants({ variant: "outline" }))}
           >
-            <GitHubLogoIcon className="h-4 w-4" aria-hidden="true" />
+            <GitHubLogoIcon className="h-4 w-4 mr-2" aria-hidden="true" />
             Github
           </Link>
 
