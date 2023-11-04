@@ -64,6 +64,10 @@
     @apply max-w-7xl mx-auto px-6;
   }
 
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
   .flex-between {
     @apply flex items-center justify-between;
   }
@@ -84,5 +88,17 @@
 @layer components {
   .site-header {
     @apply w-full sticky top-0 border-b py-2.5;
+  }
+
+  .hero {
+    @apply w-full max-w-5xl mx-auto flex-center flex-col text-center gap-4;
+  }
+
+  .hero-heading {
+    @apply text-3xl sm:text-5xl xl:text-7xl font-bold;
+  }
+
+  .hero-subtitle {
+    @apply text-base sm:text-lg xl:text-xl text-muted max-w-xl font-medium;
   }
 }

@@ -12,7 +12,7 @@ export function AuthNav() {
 
         <div className="flex items-center gap-2">
           <ThemeToggler />
-          <Link to="/sign" className={buttonVariants()}>
+          <Link to="/sign-in" className={buttonVariants()}>
             Sign in
           </Link>
         </div>
