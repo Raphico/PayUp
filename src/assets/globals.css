@@ -61,7 +61,7 @@
 
 @layer utilities {
   .max-width {
-    @apply max-w-7xl mx-auto px-6;
+    @apply w-full max-w-7xl mx-auto px-6;
   }
 
   .flex-center {
@@ -70,6 +70,10 @@
 
   .flex-between {
     @apply flex items-center justify-between;
+  }
+
+  .y-paddings {
+    @apply py-12 sm:py-24;
   }
 
   .heading3 {

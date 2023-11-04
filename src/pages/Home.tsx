@@ -8,7 +8,7 @@ export function HomePage() {
   return (
     <>
       <AuthNav />
-      <main className="max-width py-12 sm:py-24">
+      <main className="max-width y-paddings">
         <section className="hero">
           <Link
             to="https://github.com/Raphico/payUp"
