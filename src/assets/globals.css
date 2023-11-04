@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 4%;
+
+    --accent: 246 35% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --primary: 240 10% 4%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 209 100% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --destructive: 359 84% 57%;
+    --destructive-foreground: 0 0% 100%;
+
+    --pending: 39 100% 50%;
+    --draft: 240 6% 63%;
+    --paid: 158 100% 33%;
+
+    --muted: 0 0% 44%;
+
+    --border: 30 3% 85%;
+    --ring: 24.6 95% 53.1%;
+    --input: 30 3% 85%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 10% 4%;
+
+    --muted: 240 5% 64%;
+
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 20.5 90.2% 48.2%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-inter bg-background text-foreground;
+  }
+}

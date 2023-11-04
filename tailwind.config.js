@@ -6,7 +6,7 @@ export default {
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
-        ring: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         muted: "hsl(var(--muted))",
@@ -17,13 +17,17 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
-        edit: {
-          DEFAULT: "hsl(var(--edit))",
-          foreground: "hsl(var(--edit-foreground))",
+        primary: {
+          DEFAULT: "hls(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
-        delete: {
-          DEFAULT: "hsl(var(--delete))",
-          foreground: "hsl(var(--delete-foreground))",
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
       },
       fontFamily: {
