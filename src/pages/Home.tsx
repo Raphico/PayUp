@@ -1,8 +1,8 @@
 import { AuthNav } from "../components/layouts/AuthNav"
 import { buttonVariants } from "../components/ui/Button"
-import { GitHubLogoIcon } from "@radix-ui/react-icons"
 import { Link } from "react-router-dom"
 import { cn } from "../lib/utils"
+import { Icons } from "../components/Icons"
 
 export function HomePage() {
   return (
@@ -15,7 +15,7 @@ export function HomePage() {
             target="_blank"
             className={cn(buttonVariants({ variant: "outline" }))}
           >
-            <GitHubLogoIcon className="h-4 w-4 mr-2" aria-hidden="true" />
+            <Icons.github className="h-4 w-4 mr-2" aria-hidden="true" />
             Github
           </Link>
 

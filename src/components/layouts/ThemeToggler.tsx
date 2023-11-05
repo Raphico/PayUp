@@ -1,4 +1,4 @@
-import { useTheme } from "../../context/ThemeContext"
+import { useTheme } from "../../contexts/ThemeContext"
 import { Button } from "../ui/Button"
 import { SunIcon, MoonIcon } from "@radix-ui/react-icons"
 

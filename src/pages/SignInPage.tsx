@@ -1,5 +1,5 @@
 import { GoBack } from "../components/GoBack"
-import { Button } from "../components/ui/Button"
+import { OAuthSignIn } from "../components/OAuthSignIn"
 
 export function SignInPage() {
   return (
@@ -11,10 +11,7 @@ export function SignInPage() {
           <h2 className="heading2">PayUp</h2>
         </div>
 
-        <div className="grid gap-4 w-full max-w-sm mx-auto">
-          <Button variant="outline">Sign in with Google</Button>
-          <Button>Sign in with Github</Button>
-        </div>
+        <OAuthSignIn />
       </section>
     </main>
   )
