@@ -1,5 +1,5 @@
-import { useTheme } from "../../contexts/ThemeContext"
-import { Button } from "../ui/Button"
+import { useTheme } from "../contexts/ThemeContext"
+import { Button } from "./ui/Button"
 import { SunIcon, MoonIcon } from "@radix-ui/react-icons"
 
 export function ThemeToggler() {

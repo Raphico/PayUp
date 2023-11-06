@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 
-import { Logo } from "../Logo"
-import { buttonVariants } from "../ui/Button"
-import { ThemeToggler } from "./ThemeToggler"
+import { Logo } from "../../components/Logo"
+import { buttonVariants } from "../../components/ui/Button"
+import { ThemeToggler } from "../../components/ThemeToggler"
 
 export function AuthNav() {
   return (

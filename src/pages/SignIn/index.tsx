@@ -1,6 +1,6 @@
-import { GoBack } from "../components/GoBack"
-import { Icons } from "../components/Icons"
-import { OAuthSignIn } from "../components/OAuthSignIn"
+import { GoBack } from "../../components/GoBack"
+import { Icons } from "../../components/Icons"
+import { OAuthSignIn } from "./OAuthSignIn"
 
 export function SignInPage() {
   return (

@@ -1,9 +1,9 @@
 import * as React from "react"
 import { useNavigate } from "react-router-dom"
-import { OAuthStrategy, useAuth } from "../contexts/AuthContext"
-import { Button } from "../components/ui/Button"
-import { Icons } from "./Icons"
-import { catchError } from "../lib/utils"
+import { OAuthStrategy, useAuth } from "../../contexts/AuthContext"
+import { Button } from "../../components/ui/Button"
+import { Icons } from "../../components/Icons"
+import { catchError } from "../../lib/utils"
 
 const oauthProviders = [
   {

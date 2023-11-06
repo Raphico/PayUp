@@ -1,8 +1,8 @@
-import { AuthNav } from "../components/layouts/AuthNav"
-import { buttonVariants } from "../components/ui/Button"
+import { AuthNav } from "./AuthNav"
+import { buttonVariants } from "../../components/ui/Button"
 import { Link } from "react-router-dom"
-import { cn } from "../lib/utils"
-import { Icons } from "../components/Icons"
+import { cn } from "../../lib/utils"
+import { Icons } from "../../components/Icons"
 
 export function HomePage() {
   return (

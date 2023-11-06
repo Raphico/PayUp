@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom"
 import { HomePage } from "./pages/Home"
-import { SignInPage } from "./pages/SignInPage"
+import { SignInPage } from "./pages/SignIn"
 
 export default function App() {
   return (
