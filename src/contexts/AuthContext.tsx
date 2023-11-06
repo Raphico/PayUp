@@ -35,6 +35,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [currentUser, setCurrentUser] = React.useState<User | null>(null)
+  const [isLoading, setIsLoading] = React.useState(true)
 
   const signOutCurrentUser = () => {
     return signOut(auth)
@@ -53,7 +54,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   React.useEffect(() => {
-    const unSubscribe = auth.onAuthStateChanged((user) => setCurrentUser(user))
+    const unSubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user)
+      setIsLoading(false)
+    })
 
     return unSubscribe
   }, [])
@@ -66,7 +70,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         signIn,
       }}
     >
-      {children}
+      {!isLoading && children}
     </AuthContext.Provider>
   )
 }
