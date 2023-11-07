@@ -21,6 +21,9 @@
     --destructive: 359 84% 57%;
     --destructive-foreground: 0 0% 100%;
 
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 4%;
+
     --pending: 39 100% 50%;
     --draft: 240 6% 63%;
     --paid: 158 100% 33%;
@@ -40,6 +43,9 @@
 
     --primary: 0 0% 98%;
     --primary-foreground: 240 10% 4%;
+
+    --popover: 240 10% 4%;
+    --popover-foreground: 0 0% 98%;
 
     --muted: 240 5% 64%;
 
