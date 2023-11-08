@@ -15,9 +15,9 @@ export function SignInPage() {
     <main className="max-width y-paddings">
       <GoBack />
       <section className="w-full flex-center flex-col gap-10 y-paddings">
-        <div className="flex items-center gap-2">
-          <Icons.logo className="h-10 w-10" aria-label="PayUp logo" />
-          <h2 className="heading2">PayUp</h2>
+        <div className="flex-center flex-col gap-4">
+          <Icons.logo className="h-12 w-12" aria-hidden="true" />
+          <h1 className="font-medium text-3xl">Sign in</h1>
         </div>
 
         <OAuthSignIn />
