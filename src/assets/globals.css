@@ -80,18 +80,6 @@
   .y-paddings {
     @apply py-12 sm:py-24;
   }
-
-  .heading3 {
-    @apply font-bold text-xl;
-  }
-
-  .heading2 {
-    @apply font-bold text-2xl;
-  }
-
-  .heading1 {
-    @apply font-bold text-3xl;
-  }
 }
 
 @layer components {
