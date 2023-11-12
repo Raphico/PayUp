@@ -15,12 +15,18 @@ interface ItemList {
   price: number
 }
 
+enum InvoiceStatus {
+  PENDING = "pending",
+  PAID = "paid",
+  DRAFTED = "drafted",
+}
+
 export interface Invoice {
   id: string
   uid: string
   invoiceDate: string
   dueDate: string
-  invoiceStatus: string
+  invoiceStatus: InvoiceStatus
   billFrom: BillFrom
   billTo: BillTo
   serviceDescription: string
