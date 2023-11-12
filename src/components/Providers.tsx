@@ -1,18 +1,23 @@
 import { Toaster } from "sonner"
 import { AuthProvider } from "../contexts/AuthContext"
 import { ThemeProvider } from "../contexts/ThemeContext"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 interface ProvidersProps {
   children: React.ReactNode
 }
 
+const queryClient = new QueryClient()
+
 export function Providers({ children }: ProvidersProps) {
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <Toaster position="top-center" richColors />
-        {children}
-      </ThemeProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <ThemeProvider>
+          <Toaster position="top-center" richColors />
+          {children}
+        </ThemeProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   )
 }
