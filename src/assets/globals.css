@@ -90,7 +90,7 @@
 
 @layer components {
   .site-header {
-    @apply w-full sticky top-0 border-b py-2.5;
+    @apply w-full sticky top-0 border-b py-2.5 bg-background;
   }
 
   .hero {
