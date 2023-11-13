@@ -19,7 +19,7 @@ interface PageHeaderHeadingProps
 const PageHeaderHeading = ({ className, ...props }: PageHeaderHeadingProps) => (
   <h1
     className={cn(
-      "font-bold leading-tight tracking-tighter lg:leading-[1.1] text-2xl",
+      "font-bold leading-tight tracking-tighter lg:leading-[1.1] text-2xl sm:text-3xl",
       className
     )}
     {...props}
