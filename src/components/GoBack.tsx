@@ -1,16 +1,16 @@
-import { Link } from "react-router-dom"
-import { cn } from "../lib/utils"
-import { buttonVariants } from "./ui/Button"
+import { Button } from "./ui/Button"
 import { ChevronLeftIcon } from "@radix-ui/react-icons"
+import { useNavigate } from "react-router-dom"
 
 export function GoBack() {
+  const navigate = useNavigate()
+
+  const PREVIOUS_PAGE = -1
+
   return (
-    <Link
-      to="../"
-      className={cn(buttonVariants({ variant: "ghost" }), "gap-2")}
-    >
+    <Button onClick={() => navigate(PREVIOUS_PAGE)} variant="ghost">
       <ChevronLeftIcon className="h-4 w-4" aria-hidden="true" />
       Go back
-    </Link>
+    </Button>
   )
 }
