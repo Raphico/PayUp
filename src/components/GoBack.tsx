@@ -9,7 +9,7 @@ export function GoBack() {
 
   return (
     <Button onClick={() => navigate(PREVIOUS_PAGE)} variant="ghost">
-      <ChevronLeftIcon className="h-4 w-4" aria-hidden="true" />
+      <ChevronLeftIcon className="h-4 w-4 mr-2" aria-hidden="true" />
       Go back
     </Button>
   )
