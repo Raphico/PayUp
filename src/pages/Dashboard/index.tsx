@@ -52,7 +52,7 @@ export function DashboardPage() {
               <Icons.amount className="h-4 w-4 text-muted" />
             </CardHeader>
             <CardContent>
-              <h2 className="font-bold text-xl sm:text-2xl">
+              <h2 className="font-bold text-xl">
                 ${invoiceStats?.totalInvoicesAmount}
               </h2>
             </CardContent>
@@ -66,7 +66,7 @@ export function DashboardPage() {
               <Icons.amount className="h-4 w-4 text-muted" />
             </CardHeader>
             <CardContent>
-              <h2 className="font-bold text-xl sm:text-2xl">
+              <h2 className="font-bold text-xl">
                 ${invoiceStats?.averageInvoiceAmount}
               </h2>
             </CardContent>
