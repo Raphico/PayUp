@@ -21,7 +21,7 @@ export function RecentInvoices() {
         <div className="grid gap-4">
           {invoices?.map((invoice) => {
             const totalInvoiceAmount = invoice.itemList.reduce(
-              (total, item) => (total += item.price * item.quantity),
+              (total, item) => total + item.quantity * item.price,
               0
             )
             return (
