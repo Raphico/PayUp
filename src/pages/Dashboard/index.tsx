@@ -35,7 +35,10 @@ export function DashboardPage() {
               <CardTitle className="text-muted font-medium text-sm">
                 Total Invoices
               </CardTitle>
-              <Icons.invoices className="h-4 w-4 text-muted" />
+              <Icons.invoices
+                className="h-4 w-4 text-muted"
+                aria-hidden="true"
+              />
             </CardHeader>
             <CardContent>
               <h2 className="font-bold text-xl sm:text-2xl">
@@ -49,7 +52,7 @@ export function DashboardPage() {
               <CardTitle className="text-muted font-medium text-sm">
                 Total Invoice Amount
               </CardTitle>
-              <Icons.amount className="h-4 w-4 text-muted" />
+              <Icons.amount className="h-4 w-4 text-muted" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <h2 className="font-bold text-xl">
@@ -63,7 +66,7 @@ export function DashboardPage() {
               <CardTitle className="text-muted font-medium text-sm">
                 Average Invoice Amount
               </CardTitle>
-              <Icons.amount className="h-4 w-4 text-muted" />
+              <Icons.amount className="h-4 w-4 text-muted" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <h2 className="font-bold text-xl">
