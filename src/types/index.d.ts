@@ -25,7 +25,7 @@ export interface Invoice {
   id: string
   uid: string
   invoiceDate: string
-  dueDate: string
+  paymentTerms: string
   invoiceStatus: InvoiceStatus
   billFrom: BillFrom
   billTo: BillTo
