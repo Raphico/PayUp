@@ -245,7 +245,7 @@ export function InvoiceForm() {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-4 items-center">
+        <div className="grid sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="invoiceDate"
@@ -290,7 +290,7 @@ export function InvoiceForm() {
             name="paymentTerms"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>PaymentTerms</FormLabel>
+                <FormLabel>Payment Terms</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
