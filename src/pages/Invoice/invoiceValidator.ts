@@ -23,7 +23,7 @@ export const invoiceValidator = z.object({
   itemList: z.array(
     z.object({
       item: z.string(),
-      quantity: z.number(),
+      quantity: z.coerce.number(),
       price: z.coerce.number(),
     })
   ),
