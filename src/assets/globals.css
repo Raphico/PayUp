@@ -105,3 +105,13 @@
     @apply text-base sm:text-lg xl:text-xl text-muted max-w-xl font-medium;
   }
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
