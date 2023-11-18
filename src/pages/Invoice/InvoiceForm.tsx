@@ -23,8 +23,7 @@ import {
 import { Button } from "../../components/ui/Button"
 import { Input } from "../../components/ui/Input"
 
-import { z } from "zod"
-import { invoiceValidator } from "./invoiceValidator"
+import { invoiceValidator, InvoiceInputs } from "./invoiceValidator"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { CalendarIcon, TrashIcon } from "@radix-ui/react-icons"
@@ -34,13 +33,11 @@ import { cn } from "../../lib/utils"
 import { format } from "date-fns"
 import { Calendar } from "../../components/ui/Calendar"
 
-type Input = z.infer<typeof invoiceValidator>
-
 const Total = ({
   control,
   index,
 }: {
-  control: Control<Input>
+  control: Control<InvoiceInputs>
   index: number
 }) => {
   const item = useWatch({
@@ -61,7 +58,7 @@ const Total = ({
 export function InvoiceForm() {
   const isPending = false
 
-  const form = useForm<Input>({
+  const form = useForm<InvoiceInputs>({
     resolver: zodResolver(invoiceValidator),
     defaultValues: {
       sellerStreetAddress: "",
@@ -86,9 +83,11 @@ export function InvoiceForm() {
     name: "itemList",
   })
 
-  const onSubmit = (values: Input) => {
+  const onSubmit = (values: InvoiceInputs) => {
     console.log(values)
   }
+
+  const itemListError = form.formState.errors.itemList
 
   return (
     <Form {...form}>
@@ -330,7 +329,15 @@ export function InvoiceForm() {
         </div>
 
         <div className="grid gap-4">
-          <p className="text-lg text-muted font-semibold">Item List</p>
+          <div className="flex items-center justify-between">
+            <p className="text-lg text-muted font-semibold">Item List</p>
+
+            {itemListError && (
+              <p className="text-sm font-medium text-destructive">
+                {itemListError.message}
+              </p>
+            )}
+          </div>
 
           <div className="grid gap-6">
             {itemListFieldArray.fields.map((field, index) => (
