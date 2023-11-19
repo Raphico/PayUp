@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import { addDoc, collection } from "firebase/firestore"
+import { doc, setDoc } from "firebase/firestore"
 import { db } from "../../../lib/firebase"
 
 import { useAuth } from "../../../contexts/AuthContext"
@@ -9,6 +9,7 @@ import { InvoiceInputs } from "../invoiceValidator"
 import { InvoiceForm } from "../InvoiceForm"
 
 import { catchError } from "../../../lib/utils"
+import { generateInvoiceId } from "./generateInvoiceId"
 
 export function CreateInvoicePage() {
   const { currentUser } = useAuth()
@@ -18,8 +19,13 @@ export function CreateInvoicePage() {
 
   const { mutate: createInvoice, isPending } = useMutation({
     mutationFn: async (values: InvoiceInputs) => {
-      const invoicesRef = collection(db, "invoices")
-      await addDoc(invoicesRef, { ...values, uid: currentUser.uid })
+      const invoiceId = generateInvoiceId()
+
+      await setDoc(doc(db, "invoices", invoiceId), {
+        ...values,
+        invoiceStatus: "pending",
+        uid: currentUser.uid,
+      })
     },
     onSuccess() {
       navigate("/invoices")
