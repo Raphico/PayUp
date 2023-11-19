@@ -1,21 +1,10 @@
-interface BillFrom {
-  streetAddress: string
-  postalCode: string
-  country: string
-}
-
-interface BillTo extends BillFrom {
-  name: string
-  email: string
-}
-
 interface ItemList {
   name: string
   quantity: number
   price: number
 }
 
-enum InvoiceStatus {
+export enum InvoiceStatus {
   PENDING = "pending",
   PAID = "paid",
   DRAFTED = "drafted",
@@ -27,8 +16,19 @@ export interface Invoice {
   invoiceDate: string
   paymentTerms: string
   invoiceStatus: InvoiceStatus
-  billFrom: BillFrom
-  billTo: BillTo
+
+  sellerStreetAddress: string
+  sellerCity: string
+  sellerPostCode: string
+  sellerCountry: string
+
+  clientName: string
+  clientEmail: string
+  clientStreetAddress: string
+  clientCity: string
+  clientPostCode: string
+  clientCountry: string
+
   serviceDescription: string
   itemList: ItemList[]
 }
