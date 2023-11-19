@@ -55,9 +55,12 @@ const Total = ({
   )
 }
 
-export function InvoiceForm() {
-  const isPending = false
+interface InvoiceFormProps {
+  onSubmit: (values: InvoiceInputs) => void
+  isPending: boolean
+}
 
+export function InvoiceForm({ onSubmit, isPending }: InvoiceFormProps) {
   const form = useForm<InvoiceInputs>({
     resolver: zodResolver(invoiceValidator),
     defaultValues: {
@@ -82,10 +85,6 @@ export function InvoiceForm() {
     control: form.control,
     name: "itemList",
   })
-
-  const onSubmit = (values: InvoiceInputs) => {
-    console.log(values)
-  }
 
   const itemListError = form.formState.errors.itemList
 
