@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore"
+
 interface ItemList {
   name: string
   quantity: number
@@ -13,7 +15,7 @@ export enum InvoiceStatus {
 export interface Invoice {
   id: string
   uid: string
-  invoiceDate: string
+  invoiceDate: Timestamp
   paymentTerms: string
   invoiceStatus: InvoiceStatus
 

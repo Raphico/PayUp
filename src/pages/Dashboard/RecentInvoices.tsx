@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { fetchRecentInvoices } from "./fetchRecentInvoices"
 import { useAuth } from "../../contexts/AuthContext"
 import { Link } from "react-router-dom"
+import { formatFirestoreTimestamp } from "../../lib/utils"
 
 export function RecentInvoices() {
   const { currentUser } = useAuth()
@@ -32,7 +33,9 @@ export function RecentInvoices() {
               >
                 <div className="grid gap-1">
                   <p className="font-medium">{invoice.id}</p>
-                  <p className="text-muted">{invoice.invoiceDate}</p>
+                  <p className="text-muted">
+                    {formatFirestoreTimestamp(invoice.invoiceDate)}
+                  </p>
                 </div>
                 <p className="font-medium text-lg">${totalInvoiceAmount}</p>
               </Link>
