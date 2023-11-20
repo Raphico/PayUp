@@ -56,7 +56,7 @@ export function DashboardPage() {
             </CardHeader>
             <CardContent>
               <h2 className="font-bold text-xl">
-                ${invoiceStats?.totalInvoicesAmount}
+                {invoiceStats?.totalInvoicesAmount}
               </h2>
             </CardContent>
           </Card>
@@ -70,7 +70,7 @@ export function DashboardPage() {
             </CardHeader>
             <CardContent>
               <h2 className="font-bold text-xl">
-                ${invoiceStats?.averageInvoiceAmount}
+                {invoiceStats?.averageInvoiceAmount}
               </h2>
             </CardContent>
           </Card>

@@ -37,7 +37,7 @@ export function RecentInvoices() {
                     {formatFirestoreTimestamp(invoice.invoiceDate)}
                   </p>
                 </div>
-                <p className="font-medium text-lg">${totalInvoiceAmount}</p>
+                <p className="font-medium text-lg">{totalInvoiceAmount}</p>
               </Link>
             )
           })}
