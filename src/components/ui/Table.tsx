@@ -5,7 +5,9 @@ const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-  <table ref={ref} className={cn("w-full text-sm", className)} {...props} />
+  <div className="relative w-full overflow-auto">
+    <table ref={ref} className={cn("w-full text-sm", className)} {...props} />
+  </div>
 ))
 
 Table.displayName = "Table"
@@ -23,14 +25,7 @@ const TableBody = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <tbody
-    ref={ref}
-    className={cn(
-      "max-sm:[&_td:first-child]:pt-6 max-sm:[&_td:last-child]:pb-6",
-      className
-    )}
-    {...props}
-  />
+  <tbody ref={ref} className={cn(className)} {...props} />
 ))
 
 TableBody.displayName = "TableBody"
@@ -54,10 +49,7 @@ const TableHead = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <th
     ref={ref}
-    className={cn(
-      "max-sm:hidden text-left font-medium text-muted p-4 capitalize",
-      className
-    )}
+    className={cn("text-left font-medium text-muted p-4 capitalize", className)}
     {...props}
   />
 ))
@@ -66,24 +58,9 @@ TableHead.displayName = "TableHead"
 
 const TableCell = React.forwardRef<
   HTMLTableCellElement,
-  React.HTMLAttributes<HTMLTableCellElement> & { heading?: string }
->(({ className, heading, children, ...props }, ref) => (
-  <td
-    role="cell"
-    ref={ref}
-    className={cn(
-      "max-sm:grid max-sm:grid-cols-[15ch,auto] gap-2 max-sm:p-2 p-4",
-      className
-    )}
-    {...props}
-  >
-    {heading && (
-      <span className="sm:hidden capitalize text-muted font-medium">
-        {heading}:{" "}
-      </span>
-    )}
-    {children}
-  </td>
+  React.HTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <td ref={ref} className={cn("p-4", className)} {...props} />
 ))
 
 export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }
