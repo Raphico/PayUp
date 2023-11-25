@@ -18,7 +18,7 @@ export function DashboardPage() {
   if (!currentUser) return null
 
   const { data: invoiceStats } = useQuery({
-    queryKey: ["dashboard"],
+    queryKey: ["dashboard", currentUser.uid],
     queryFn: () => fetchUserInvoicesStats(currentUser.uid),
   })
 

@@ -10,7 +10,7 @@ export function RecentInvoices() {
   if (!currentUser) return null
 
   const { data: invoices } = useQuery({
-    queryKey: ["recent-invoices"],
+    queryKey: ["recent-invoices", currentUser.uid],
     queryFn: () => fetchRecentInvoices(currentUser.uid),
   })
 
