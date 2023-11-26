@@ -20,11 +20,16 @@ export function CreateInvoicePage() {
   const { mutate: createInvoice, isPending } = useMutation({
     mutationFn: async (values: InvoiceInputs) => {
       const invoiceId = generateInvoiceId()
+      const amount = values.itemList.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      )
 
       await setDoc(doc(db, "invoices", invoiceId), {
         ...values,
         invoiceStatus: "pending",
         uid: currentUser.uid,
+        amount,
       })
     },
     onSuccess() {
