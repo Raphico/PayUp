@@ -33,4 +33,6 @@ export interface Invoice {
 
   serviceDescription: string
   itemList: ItemList[]
+
+  amount: number
 }
