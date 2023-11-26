@@ -20,27 +20,21 @@ export function RecentInvoices() {
         <p className="flex-center text-muted font-medium">No recent invoices</p>
       ) : (
         <div className="grid gap-4">
-          {invoices?.map((invoice) => {
-            const totalInvoiceAmount = invoice.itemList.reduce(
-              (total, item) => total + item.quantity * item.price,
-              0
-            )
-            return (
-              <Link
-                to={`/invoice/${invoice.id}`}
-                key={invoice.id}
-                className="flex-between"
-              >
-                <div className="grid gap-1">
-                  <p className="font-medium">{invoice.id}</p>
-                  <p className="text-muted">
-                    {formatFirestoreTimestamp(invoice.invoiceDate)}
-                  </p>
-                </div>
-                <p className="font-medium text-lg">{totalInvoiceAmount}</p>
-              </Link>
-            )
-          })}
+          {invoices?.map((invoice) => (
+            <Link
+              to={`/invoice/${invoice.id}`}
+              key={invoice.id}
+              className="flex-between"
+            >
+              <div className="grid gap-1">
+                <p className="font-medium">{invoice.id}</p>
+                <p className="text-muted">
+                  {formatFirestoreTimestamp(invoice.invoiceDate)}
+                </p>
+              </div>
+              <p className="font-medium text-lg">{invoice.amount}</p>
+            </Link>
+          ))}
         </div>
       )}
     </div>

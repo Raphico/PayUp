@@ -18,10 +18,7 @@ export const fetchUserInvoicesStats = async (uid: string) => {
   querySnapshot.docs.forEach((doc) => {
     const invoice = doc.data() as Invoice
 
-    totalInvoicesAmount += invoice.itemList.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    )
+    totalInvoicesAmount += invoice.amount
 
     switch (invoice.invoiceStatus) {
       case "pending":
