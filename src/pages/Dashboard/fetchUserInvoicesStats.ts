@@ -2,7 +2,6 @@ import { collection, getDocs, query, where } from "firebase/firestore"
 import { db } from "../../lib/firebase"
 import { Invoice } from "../../types"
 import { FirebaseError } from "firebase/app"
-import { formatCurrency } from "../../lib/utils"
 
 export const fetchUserInvoicesStats = async (uid: string) => {
   try {
