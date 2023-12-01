@@ -13,10 +13,10 @@ const PageHeader = ({
   <Comp className={cn("grid gap-1", className)} {...props} />
 )
 
-interface PageHeaderHeadingProps
-  extends React.HTMLAttributes<HTMLHeadingElement> {}
-
-const PageHeaderHeading = ({ className, ...props }: PageHeaderHeadingProps) => (
+const PageHeaderHeading = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLHeadingElement>) => (
   <h1
     className={cn(
       "font-bold leading-tight tracking-tighter lg:leading-[1.1] text-2xl",
@@ -26,13 +26,10 @@ const PageHeaderHeading = ({ className, ...props }: PageHeaderHeadingProps) => (
   />
 )
 
-interface PageHeaderDescriptionProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {}
-
 const PageHeaderDescription = ({
   className,
   ...props
-}: PageHeaderDescriptionProps) => (
+}: React.HTMLAttributes<HTMLParagraphElement>) => (
   <p className={cn("font-medium text-base text-muted", className)} {...props} />
 )
 
