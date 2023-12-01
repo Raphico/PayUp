@@ -1,14 +1,18 @@
-import { Icons } from "../../components/Icons"
 import { PageHeader, PageHeaderHeading } from "../../components/PageHeader"
+import { Skeleton } from "../../components/Skeleton"
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "../../components/ui/Card"
-import { useAuth } from "../../contexts/AuthContext"
-import { InvoiceChart } from "./InvoiceChart"
 import { RecentInvoices } from "./RecentInvoices"
+import { InvoiceChart } from "./InvoiceChart"
+import { Icons } from "../../components/Icons"
+
+import { useAuth } from "../../contexts/AuthContext"
+import { catchError, formatCurrency } from "../../lib/utils"
+
 import { fetchUserInvoicesStats } from "./fetchUserInvoicesStats"
 import { useQuery } from "@tanstack/react-query"
 
@@ -17,10 +21,18 @@ export function DashboardPage() {
 
   if (!currentUser) return null
 
-  const { data: invoiceStats } = useQuery({
+  const {
+    data: invoiceStats,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["dashboard", currentUser.uid],
     queryFn: () => fetchUserInvoicesStats(currentUser.uid),
   })
+
+  if (error) {
+    catchError(error)
+  }
 
   return (
     <>
@@ -41,9 +53,13 @@ export function DashboardPage() {
               />
             </CardHeader>
             <CardContent>
-              <h2 className="font-bold text-xl sm:text-2xl">
-                {invoiceStats?.totalInvoiceCount}
-              </h2>
+              {isLoading ? (
+                <Skeleton className="h-8 w-12" />
+              ) : (
+                <h2 className="font-bold text-xl">
+                  {invoiceStats ? invoiceStats.totalInvoiceCount : "N/A"}
+                </h2>
+              )}
             </CardContent>
           </Card>
 
@@ -55,9 +71,15 @@ export function DashboardPage() {
               <Icons.amount className="h-4 w-4 text-muted" aria-hidden="true" />
             </CardHeader>
             <CardContent>
-              <h2 className="font-bold text-xl">
-                {invoiceStats?.totalInvoicesAmount}
-              </h2>
+              {isLoading ? (
+                <Skeleton className="h-8 w-12" />
+              ) : (
+                <h2 className="font-bold text-xl">
+                  {invoiceStats
+                    ? formatCurrency(invoiceStats.totalInvoicesAmount)
+                    : "N/A"}
+                </h2>
+              )}
             </CardContent>
           </Card>
 
@@ -69,9 +91,15 @@ export function DashboardPage() {
               <Icons.amount className="h-4 w-4 text-muted" aria-hidden="true" />
             </CardHeader>
             <CardContent>
-              <h2 className="font-bold text-xl">
-                {invoiceStats?.averageInvoiceAmount}
-              </h2>
+              {isLoading ? (
+                <Skeleton className="h-8 w-12" />
+              ) : (
+                <h2 className="font-bold text-xl">
+                  {invoiceStats
+                    ? formatCurrency(invoiceStats.averageInvoiceAmount)
+                    : "N/A"}
+                </h2>
+              )}
             </CardContent>
           </Card>
         </div>
