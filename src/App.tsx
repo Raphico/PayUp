@@ -1,11 +1,26 @@
+import * as React from "react"
 import { Routes, Route } from "react-router-dom"
-import { HomePage } from "./pages/Home"
-import { SignInPage } from "./pages/SignIn"
-import { DashboardPage } from "./pages/Dashboard"
-import { InvoicesPage } from "./pages/Invoices"
-import { CreateInvoicePage } from "./pages/Invoice/new"
+
 import { InvoiceLayout } from "./pages/Invoice/InvoiceLayout"
 import { RootLayout } from "./components/RootLayout"
+import { HomePage } from "./pages/Home"
+import { SignInPage } from "./pages/SignIn"
+
+const DashboardPage = React.lazy(() =>
+  import("./pages/Dashboard").then((module) => ({
+    default: module.DashboardPage,
+  }))
+)
+const InvoicesPage = React.lazy(() =>
+  import("./pages/Invoices").then((module) => ({
+    default: module.InvoicesPage,
+  }))
+)
+const CreateInvoicePage = React.lazy(() =>
+  import("./pages/Invoice/new").then((module) => ({
+    default: module.CreateInvoicePage,
+  }))
+)
 
 export default function App() {
   return (
