@@ -1,8 +1,15 @@
+import * as React from "react"
 import { NavLink } from "react-router-dom"
-import { cn } from "../lib/utils"
+
 import { ThemeToggler } from "./ThemeToggler"
-import { UserMenu } from "./UserMenu"
 import { Icons } from "./Icons"
+
+import { cn } from "../lib/utils"
+import { Skeleton } from "./Skeleton"
+
+const UserMenu = React.lazy(() =>
+  import("./UserMenu").then((module) => ({ default: module.UserMenu }))
+)
 
 const mainNavItems = [
   {
@@ -42,7 +49,11 @@ export function MainNav() {
 
         <div className="flex items-center gap-4">
           <ThemeToggler />
-          <UserMenu />
+          <React.Suspense
+            fallback={<Skeleton className="h-8 w-8 rounded-full" />}
+          >
+            <UserMenu />
+          </React.Suspense>
         </div>
       </nav>
     </header>
