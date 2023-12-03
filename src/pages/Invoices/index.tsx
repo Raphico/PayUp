@@ -108,7 +108,23 @@ export function InvoicesPage() {
                       {formatFirestoreTimestamp(invoice.date)}
                     </TableCell>
                     <TableCell>{invoice.client}</TableCell>
-                    <TableCell>{invoice.status}</TableCell>
+                    <TableCell>
+                      <div
+                        className={cn(
+                          `flex-center w-20 rounded-md p-2 capitalize`,
+                          {
+                            "bg-pending/10 text-pending":
+                              invoice.status.includes("pending"),
+                            "bg-paid/10 text-paid":
+                              invoice.status.includes("paid"),
+                            "bg-draft/10 text-draft":
+                              invoice.status.includes("drafted"),
+                          }
+                        )}
+                      >
+                        {invoice.status}
+                      </div>
+                    </TableCell>
                     <TableCell>{formatCurrency(invoice.amount)}</TableCell>
                   </TableRow>
                 ))
