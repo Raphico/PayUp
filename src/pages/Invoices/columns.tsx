@@ -1,15 +1,15 @@
 export const columns = [
   {
     id: "invoice",
-    header: <div className="">Invoice</div>,
+    header: <div className="w-[100px]">Invoice</div>,
   },
   {
     id: "date",
-    header: <div className="">Date</div>,
+    header: <div className="w-[120px]">Date</div>,
   },
   {
     id: "client",
-    header: <div className="">Client</div>,
+    header: <div className="w-[130px]">Client</div>,
   },
   {
     id: "status",
