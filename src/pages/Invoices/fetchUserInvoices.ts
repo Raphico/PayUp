@@ -38,6 +38,7 @@ export const fetchUserInvoices = async (
       userInvoicesQuery = query(
         invoicesRef,
         where("uid", "==", uid),
+        orderBy("invoiceDate", "desc"),
         startAfter(firstIndex),
         limit(pageSize)
       )
@@ -66,8 +67,11 @@ export const fetchUserInvoices = async (
 
     return {
       userInvoices,
-      lastIndex: userInvoices[userInvoices.length - 1].date,
-      firstIndex: userInvoices[0].date,
+      lastIndex:
+        userInvoices.length > 0
+          ? userInvoices[userInvoices.length - 1].date
+          : null,
+      firstIndex: userInvoices.length > 0 ? userInvoices[0].date : null,
     }
   } catch (error) {
     error instanceof FirebaseError

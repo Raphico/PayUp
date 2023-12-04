@@ -45,28 +45,20 @@ export function InvoicesPage() {
   const handleGetPrevPage = () => {
     setPagination((prevState) => ({
       ...prevState,
-      pageIndex: --prevState.pageIndex,
+      pageIndex: prevState.pageIndex - 1,
       pageAction: "PREV",
+      firstIndex: data?.firstIndex || null,
     }))
   }
 
   const handleGetNextPage = () => {
     setPagination((prevState) => ({
       ...prevState,
-      pageIndex: ++prevState.pageIndex,
+      pageIndex: prevState.pageIndex + 1,
       pageAction: "NEXT",
+      lastIndex: data?.lastIndex || null,
     }))
   }
-
-  React.useEffect(() => {
-    if (data) {
-      setPagination((prevState) => ({
-        ...prevState,
-        firstIndex: data?.firstIndex,
-        lastIndex: data?.lastIndex,
-      }))
-    }
-  }, [data])
 
   return (
     <div className="space-y-8">
@@ -158,7 +150,9 @@ export function InvoicesPage() {
             onClick={handleGetNextPage}
             disabled={
               !data?.userInvoices ||
-              data.userInvoices.length < pagination.pageSize
+              data.userInvoices.length < pagination.pageSize ||
+              (data.userInvoices.length === pagination.pageSize &&
+                data.lastIndex === null)
             }
           >
             Next
