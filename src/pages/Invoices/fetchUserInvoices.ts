@@ -23,8 +23,10 @@ export const fetchUserInvoices = async (
     const isFirstPage = pageIndex === 0
 
     const invoicesRef = collection(db, "invoices")
-
     let userInvoicesQuery = query(invoicesRef)
+
+    // Increase the limit by 1 to check for the next page
+    const increasedPageSize = pageSize + 1
 
     if (pageAction === "NEXT") {
       userInvoicesQuery = query(
@@ -32,7 +34,7 @@ export const fetchUserInvoices = async (
         where("uid", "==", uid),
         orderBy("invoiceDate", "desc"),
         startAfter(lastIndex),
-        limit(pageSize)
+        limit(increasedPageSize)
       )
     } else if (!isFirstPage && pageAction === "PREV") {
       userInvoicesQuery = query(
@@ -40,20 +42,19 @@ export const fetchUserInvoices = async (
         where("uid", "==", uid),
         orderBy("invoiceDate", "desc"),
         startAfter(firstIndex),
-        limit(pageSize)
+        limit(increasedPageSize)
       )
     } else {
       userInvoicesQuery = query(
         invoicesRef,
         where("uid", "==", uid),
         orderBy("invoiceDate", "desc"),
-        limit(pageSize)
+        limit(increasedPageSize)
       )
     }
 
     const userInvoicesQuerySnapshot = await getDocs(userInvoicesQuery)
-
-    const userInvoices = userInvoicesQuerySnapshot.docs.map((doc) => {
+    const allInvoices = userInvoicesQuerySnapshot.docs.map((doc) => {
       const data = doc.data() as Invoice
 
       return {
@@ -65,8 +66,15 @@ export const fetchUserInvoices = async (
       }
     })
 
+    // Check if there's a next page
+    const hasNextPage = allInvoices.length === increasedPageSize
+
+    // If there's a next page, remove the extra invoice
+    const userInvoices = hasNextPage ? allInvoices.slice(0, -1) : allInvoices
+
     return {
       userInvoices,
+      hasNextPage,
       lastIndex:
         userInvoices.length > 0
           ? userInvoices[userInvoices.length - 1].date
@@ -77,7 +85,6 @@ export const fetchUserInvoices = async (
     error instanceof FirebaseError
       ? console.error(error.message)
       : console.error(error)
-
     throw new Error("Unable to fetch invoices")
   }
 }

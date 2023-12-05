@@ -34,7 +34,7 @@ export function InvoicesPage() {
     lastIndex: null,
   })
 
-  const canGetPrevPage = pagination.pageIndex !== 0
+  const hasPrevPage = pagination.pageIndex !== 0
 
   const { data, isPending } = useQuery({
     queryKey: ["invoices", currentUser.uid, pagination],
@@ -139,7 +139,7 @@ export function InvoicesPage() {
             sizes="sm"
             aria-label="Get previous page"
             onClick={handleGetPrevPage}
-            disabled={!data?.userInvoices || !canGetPrevPage}
+            disabled={!data?.userInvoices || !hasPrevPage}
           >
             Prev
           </Button>
@@ -148,12 +148,7 @@ export function InvoicesPage() {
             sizes="sm"
             aria-label="Get next page"
             onClick={handleGetNextPage}
-            disabled={
-              !data?.userInvoices ||
-              data.userInvoices.length < pagination.pageSize ||
-              (data.userInvoices.length === pagination.pageSize &&
-                data.lastIndex === null)
-            }
+            disabled={!data?.userInvoices || !data?.hasNextPage}
           >
             Next
           </Button>
