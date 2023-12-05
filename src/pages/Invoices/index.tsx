@@ -2,24 +2,16 @@ import * as React from "react"
 import { Link } from "react-router-dom"
 
 import { PageHeader, PageHeaderHeading } from "../../components/PageHeader"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../../components/ui/Table"
-import { Button, buttonVariants } from "../../components/ui/Button"
-import { Skeleton } from "../../components/Skeleton"
+import { InvoicesTable } from "./InvoicesTable"
+import { InvoicesTablePagination } from "./InvoicesTablePagination"
+import { buttonVariants } from "../../components/ui/Button"
 
-import { cn, formatCurrency, formatFirestoreTimestamp } from "../../lib/utils"
+import { cn } from "../../lib/utils"
 
 import { useAuth } from "../../contexts/AuthContext"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { fetchUserInvoices } from "./fetchUserInvoices"
 import { PaginationState } from "./schema"
-import { columns } from "./columns"
 
 export function InvoicesPage() {
   const { currentUser } = useAuth()
@@ -76,83 +68,13 @@ export function InvoicesPage() {
       </div>
 
       <div className="space-y-6">
-        <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableHead key={column.id}>{column.header}</TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {isPending ? (
-                <TableRow>
-                  <TableCell colSpan={columns.length}>
-                    <Skeleton className="w-full h-10" />
-                  </TableCell>
-                </TableRow>
-              ) : data?.userInvoices.length ? (
-                data.userInvoices.map((invoice) => (
-                  <TableRow key={invoice.id}>
-                    <TableCell>{invoice.id}</TableCell>
-                    <TableCell>
-                      {formatFirestoreTimestamp(invoice.date)}
-                    </TableCell>
-                    <TableCell>{invoice.client}</TableCell>
-                    <TableCell>
-                      <div
-                        className={cn(
-                          `flex-center w-20 rounded-md p-2 capitalize`,
-                          {
-                            "bg-pending/10 text-pending":
-                              invoice.status.includes("pending"),
-                            "bg-paid/10 text-paid":
-                              invoice.status.includes("paid"),
-                            "bg-draft/10 text-draft":
-                              invoice.status.includes("drafted"),
-                          }
-                        )}
-                      >
-                        {invoice.status}
-                      </div>
-                    </TableCell>
-                    <TableCell>{formatCurrency(invoice.amount)}</TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="text-center h-24"
-                  >
-                    No Invoices
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-        <div className="flex items-center gap-4 justify-end">
-          <Button
-            variant="outline"
-            sizes="sm"
-            aria-label="Get previous page"
-            onClick={handleGetPrevPage}
-            disabled={!data?.userInvoices || !hasPrevPage}
-          >
-            Prev
-          </Button>
-          <Button
-            variant="outline"
-            sizes="sm"
-            aria-label="Get next page"
-            onClick={handleGetNextPage}
-            disabled={!data?.userInvoices || !data?.hasNextPage}
-          >
-            Next
-          </Button>
-        </div>
+        <InvoicesTable isPending={isPending} invoices={data?.userInvoices} />
+        <InvoicesTablePagination
+          handleGetPrevPage={handleGetPrevPage}
+          handleGetNextPage={handleGetNextPage}
+          hasPrevPage={!data?.userInvoices || !hasPrevPage}
+          hasNextPage={!data?.userInvoices || !data?.hasNextPage}
+        />
       </div>
     </div>
   )
