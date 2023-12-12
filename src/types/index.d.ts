@@ -6,11 +6,7 @@ interface ItemList {
   price: number
 }
 
-export enum InvoiceStatus {
-  PENDING = "pending",
-  PAID = "paid",
-  DRAFTED = "drafted",
-}
+export type InvoiceStatus = "pending" | "paid" | "drafted"
 
 export interface Invoice {
   id: string

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { PageHeader, PageHeaderHeading } from "../../components/PageHeader"
 import { InvoicesTable } from "./InvoicesTable"
 import { InvoicesTablePagination } from "./InvoicesTablePagination"
+import { InvoicesTableFilter } from "./InvoicesTableFilter"
 import { buttonVariants } from "../../components/ui/Button"
 
 import { cn } from "../../lib/utils"
@@ -13,6 +14,8 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { fetchUserInvoices } from "./fetchUserInvoices"
 import { PaginationState } from "./schema"
 
+import { InvoiceStatus } from "../../types"
+
 export function InvoicesPage() {
   const { currentUser } = useAuth()
 
@@ -20,7 +23,7 @@ export function InvoicesPage() {
 
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 1, // should be adjusted to a larger number in production
+    pageSize: 2, // should be adjusted to a larger number in production
     pageAction: null,
     firstIndex: null,
     lastIndex: null,
@@ -52,6 +55,14 @@ export function InvoicesPage() {
     }))
   }
 
+  const handleStatusFiltering = (status: InvoiceStatus) => {
+    setPagination((prevState) => ({
+      ...prevState,
+      statusFilterValue:
+        prevState.statusFilterValue === status ? undefined : status,
+    }))
+  }
+
   return (
     <div className="space-y-8">
       <div className="flex-between">
@@ -68,6 +79,10 @@ export function InvoicesPage() {
       </div>
 
       <div className="space-y-6">
+        <InvoicesTableFilter
+          statusFilterValue={pagination.statusFilterValue || ""}
+          handleStatusFiltering={handleStatusFiltering}
+        />
         <InvoicesTable isPending={isPending} invoices={data?.userInvoices} />
         <InvoicesTablePagination
           handleGetPrevPage={handleGetPrevPage}

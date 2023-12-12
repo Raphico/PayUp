@@ -18,39 +18,41 @@ export const fetchUserInvoices = async (
   pagination: PaginationState
 ) => {
   try {
-    const { pageSize, lastIndex, firstIndex, pageIndex, pageAction } =
-      pagination
+    const {
+      pageSize,
+      lastIndex,
+      firstIndex,
+      pageIndex,
+      pageAction,
+      statusFilterValue,
+    } = pagination
     const isFirstPage = pageIndex === 0
 
     const invoicesRef = collection(db, "invoices")
-    let userInvoicesQuery = query(invoicesRef)
 
     // Increase the limit by 1 to check for the next page
     const increasedPageSize = pageSize + 1
 
+    let baseQuery = query(
+      invoicesRef,
+      where("uid", "==", uid),
+      orderBy("invoiceDate", "desc"),
+      limit(increasedPageSize)
+    )
+
+    if (statusFilterValue) {
+      baseQuery = query(
+        baseQuery,
+        where("invoiceStatus", "==", statusFilterValue)
+      )
+    }
+
+    let userInvoicesQuery = query(baseQuery)
+
     if (pageAction === "NEXT") {
-      userInvoicesQuery = query(
-        invoicesRef,
-        where("uid", "==", uid),
-        orderBy("invoiceDate", "desc"),
-        startAfter(lastIndex),
-        limit(increasedPageSize)
-      )
+      userInvoicesQuery = query(baseQuery, startAfter(lastIndex))
     } else if (!isFirstPage && pageAction === "PREV") {
-      userInvoicesQuery = query(
-        invoicesRef,
-        where("uid", "==", uid),
-        orderBy("invoiceDate", "desc"),
-        startAfter(firstIndex),
-        limit(increasedPageSize)
-      )
-    } else {
-      userInvoicesQuery = query(
-        invoicesRef,
-        where("uid", "==", uid),
-        orderBy("invoiceDate", "desc"),
-        limit(increasedPageSize)
-      )
+      userInvoicesQuery = query(baseQuery, startAfter(firstIndex))
     }
 
     const userInvoicesQuerySnapshot = await getDocs(userInvoicesQuery)
