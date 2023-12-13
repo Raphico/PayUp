@@ -9,3 +9,10 @@ export interface PaginationState {
   firstIndex: Timestamp | null
   statusFilterValue?: InvoiceStatus
 }
+
+export interface ColumnDef {
+  id: string
+  header: string | JSX.Element
+  isVisible: boolean
+  canHide: boolean
+}

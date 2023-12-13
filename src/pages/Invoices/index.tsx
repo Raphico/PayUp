@@ -6,15 +6,16 @@ import { InvoicesTable } from "./InvoicesTable"
 import { InvoicesTablePagination } from "./InvoicesTablePagination"
 import { InvoicesTableFilter } from "./InvoicesTableFilter"
 import { buttonVariants } from "../../components/ui/Button"
+import { InvoicesTableViewOptions } from "./InvoicesTableViewOptions"
 
 import { cn } from "../../lib/utils"
 
 import { useAuth } from "../../contexts/AuthContext"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { fetchUserInvoices } from "./fetchUserInvoices"
-import { PaginationState } from "./schema"
 
 import { InvoiceStatus } from "../../types"
+import { ColumnDef, PaginationState } from "./schema"
 
 export function InvoicesPage() {
   const { currentUser } = useAuth()
@@ -28,6 +29,39 @@ export function InvoicesPage() {
     firstIndex: null,
     lastIndex: null,
   })
+
+  const [columns, setColumns] = React.useState<ColumnDef[]>([
+    {
+      id: "invoice",
+      header: <div className="w-[100px]">Invoice</div>,
+      isVisible: true,
+      canHide: true,
+    },
+    {
+      id: "date",
+      header: <div className="w-[120px]">Date</div>,
+      isVisible: true,
+      canHide: true,
+    },
+    {
+      id: "client",
+      header: <div className="w-[130px]">Client</div>,
+      isVisible: true,
+      canHide: true,
+    },
+    {
+      id: "status",
+      header: "Status",
+      isVisible: true,
+      canHide: true,
+    },
+    {
+      id: "amount",
+      header: "Amount",
+      isVisible: true,
+      canHide: true,
+    },
+  ])
 
   const hasPrevPage = pagination.pageIndex !== 0
 
@@ -63,6 +97,19 @@ export function InvoicesPage() {
     }))
   }
 
+  const toggleColumnVisibility = (columnId: string) => {
+    setColumns((prevState) =>
+      prevState.map((column) =>
+        column.id === columnId
+          ? {
+              ...column,
+              isVisible: !column.isVisible,
+            }
+          : { ...column }
+      )
+    )
+  }
+
   return (
     <div className="space-y-8">
       <div className="flex-between">
@@ -79,11 +126,23 @@ export function InvoicesPage() {
       </div>
 
       <div className="space-y-6">
-        <InvoicesTableFilter
-          statusFilterValue={pagination.statusFilterValue || ""}
-          handleStatusFiltering={handleStatusFiltering}
+        <div className="flex-between">
+          <InvoicesTableFilter
+            statusFilterValue={pagination.statusFilterValue || ""}
+            handleStatusFiltering={handleStatusFiltering}
+          />
+          <InvoicesTableViewOptions
+            columns={columns}
+            toggleColumnVisibility={toggleColumnVisibility}
+          />
+        </div>
+
+        <InvoicesTable
+          isPending={isPending}
+          invoices={data?.userInvoices}
+          columns={columns}
         />
-        <InvoicesTable isPending={isPending} invoices={data?.userInvoices} />
+
         <InvoicesTablePagination
           handleGetPrevPage={handleGetPrevPage}
           handleGetNextPage={handleGetNextPage}

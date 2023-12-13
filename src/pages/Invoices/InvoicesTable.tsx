@@ -1,5 +1,3 @@
-import { columns } from "./columns"
-
 import {
   Table,
   TableBody,
@@ -14,6 +12,7 @@ import { cn, formatCurrency, formatFirestoreTimestamp } from "../../lib/utils"
 
 import type { Timestamp } from "firebase/firestore"
 import { InvoiceStatus } from "../../types"
+import { ColumnDef } from "./schema"
 
 interface InvoicesTableProps {
   invoices?: {
@@ -24,15 +23,22 @@ interface InvoicesTableProps {
     amount: number
   }[]
   isPending: boolean
+  columns: ColumnDef[]
 }
 
-export function InvoicesTable({ isPending, invoices }: InvoicesTableProps) {
+export function InvoicesTable({
+  isPending,
+  invoices,
+  columns,
+}: InvoicesTableProps) {
+  const visibleColumns = columns.filter((column) => column.isVisible)
+
   return (
     <div className="rounded-sm border">
       <Table>
         <TableHeader>
           <TableRow>
-            {columns.map((column) => (
+            {visibleColumns.map((column) => (
               <TableHead key={column.id}>{column.header}</TableHead>
             ))}
           </TableRow>
@@ -40,38 +46,48 @@ export function InvoicesTable({ isPending, invoices }: InvoicesTableProps) {
         <TableBody>
           {isPending ? (
             <TableRow>
-              <TableCell colSpan={columns.length}>
+              <TableCell colSpan={visibleColumns.length}>
                 <Skeleton className="w-full h-10" />
               </TableCell>
             </TableRow>
           ) : invoices?.length ? (
             invoices.map((invoice) => (
               <TableRow key={invoice.id}>
-                <TableCell>{invoice.id}</TableCell>
-                <TableCell>{formatFirestoreTimestamp(invoice.date)}</TableCell>
-                <TableCell>{invoice.client}</TableCell>
-                <TableCell>
-                  <div
-                    className={cn(
-                      `flex-center w-20 rounded-md p-2 capitalize`,
-                      {
-                        "bg-pending/10 text-pending":
-                          invoice.status.includes("pending"),
-                        "bg-paid/10 text-paid": invoice.status.includes("paid"),
-                        "bg-draft/10 text-draft":
-                          invoice.status.includes("drafted"),
-                      }
+                {visibleColumns.map((column) => (
+                  <TableCell key={column.id}>
+                    {/* Render the corresponding data based on the column ID */}
+                    {column.id === "invoice" && invoice.id}
+                    {column.id === "date" &&
+                      formatFirestoreTimestamp(invoice.date)}
+                    {column.id === "client" && invoice.client}
+                    {column.id === "status" && (
+                      <div
+                        className={cn(
+                          `flex-center w-20 rounded-md p-2 capitalize`,
+                          {
+                            "bg-pending/10 text-pending":
+                              invoice.status.includes("pending"),
+                            "bg-paid/10 text-paid":
+                              invoice.status.includes("paid"),
+                            "bg-draft/10 text-draft":
+                              invoice.status.includes("drafted"),
+                          }
+                        )}
+                      >
+                        {invoice.status}
+                      </div>
                     )}
-                  >
-                    {invoice.status}
-                  </div>
-                </TableCell>
-                <TableCell>{formatCurrency(invoice.amount)}</TableCell>
+                    {column.id === "amount" && formatCurrency(invoice.amount)}
+                  </TableCell>
+                ))}
               </TableRow>
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="text-center h-24">
+              <TableCell
+                colSpan={visibleColumns.length}
+                className="text-center h-24"
+              >
                 No Invoices
               </TableCell>
             </TableRow>
