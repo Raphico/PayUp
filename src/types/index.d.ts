@@ -1,7 +1,7 @@
 import { Timestamp } from "firebase/firestore"
 
 interface ItemList {
-  name: string
+  item: string
   quantity: number
   price: number
 }
