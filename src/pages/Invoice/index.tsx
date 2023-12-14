@@ -48,7 +48,12 @@ export function InvoicePage() {
             <CardContent className="flex-between pt-4">
               <InvoiceStatusBadge status={invoice.invoiceStatus} />
 
-              <InvoiceActions invoiceId={invoice.id} isInvoicePage={true} />
+              <InvoiceActions
+                isMarkedAsPaid={invoice.invoiceStatus === "paid"}
+                isDrafted={invoice.invoiceStatus === "drafted"}
+                invoiceId={invoice.id}
+                isInvoicePage={true}
+              />
             </CardContent>
           </Card>
 

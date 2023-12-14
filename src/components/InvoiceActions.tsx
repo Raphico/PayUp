@@ -9,18 +9,29 @@ import {
 } from "./ui/DropdownMenu"
 import { Button } from "./ui/Button"
 
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { useInvoice } from "../hooks/useInvoice"
 
 interface InvoiceActionsProps {
   isInvoicePage: boolean
   invoiceId: string
+  isMarkedAsPaid: boolean
+  isDrafted: boolean
 }
 
 export function InvoiceActions({
   isInvoicePage,
   invoiceId,
+  isMarkedAsPaid,
+  isDrafted,
 }: InvoiceActionsProps) {
   const navigate = useNavigate()
+
+  const {
+    markInvoiceAsPaidMutation,
+    addInvoiceToDraftMutation,
+    deleteInvoiceMutation,
+  } = useInvoice()
 
   return (
     <DropdownMenu>
@@ -43,10 +54,32 @@ export function InvoiceActions({
           Edit
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Mark as paid</DropdownMenuItem>
-        <DropdownMenuItem>Add to draft</DropdownMenuItem>
+        {!isMarkedAsPaid && (
+          <DropdownMenuItem
+            onClick={() => markInvoiceAsPaidMutation.mutate(invoiceId)}
+            disabled={markInvoiceAsPaidMutation.isPending}
+          >
+            Mark as paid
+          </DropdownMenuItem>
+        )}
+        {!isDrafted && (
+          <DropdownMenuItem
+            onClick={() => addInvoiceToDraftMutation.mutate(invoiceId)}
+            disabled={addInvoiceToDraftMutation.isPending}
+          >
+            Add to draft
+          </DropdownMenuItem>
+        )}
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Delete</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            deleteInvoiceMutation.mutate(invoiceId)
+            isInvoicePage && navigate("/invoices")
+          }}
+          disabled={deleteInvoiceMutation.isPending}
+        >
+          Delete
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

@@ -15,7 +15,7 @@ An invoice app built with react and firebase
 
 - [x] Authentication with **firebase**
 - [x] dashboard
-- [ ] Create, update, and delete Invoice
+- [x] Create, update, and delete Invoice
 - [x] Invoices filtering and search
 - [x] Pagination
 - [x] Theme toggling
