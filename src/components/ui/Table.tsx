@@ -27,12 +27,25 @@ const TableBody = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tbody
     ref={ref}
-    className={cn("[&_tr:last-child]:border-none", className)}
+    className={cn("[&_tr:last-child]:border-0 font-medium", className)}
     {...props}
   />
 ))
 
 TableBody.displayName = "TableBody"
+
+const TableFooter = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tfoot
+    ref={ref}
+    className={cn("border-t [&_tr:last-child]:border-b-0", className)}
+    {...props}
+  />
+))
+
+TableFooter.displayName = "TableFooter"
 
 const TableRow = React.forwardRef<
   HTMLTableRowElement,
@@ -67,4 +80,12 @@ const TableCell = React.forwardRef<
   <td ref={ref} className={cn("p-4", className)} {...props} />
 ))
 
-export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableRow,
+  TableHead,
+  TableCell,
+}
