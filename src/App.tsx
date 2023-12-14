@@ -28,6 +28,12 @@ const InvoicePage = React.lazy(() =>
   }))
 )
 
+const EditInvoicePage = React.lazy(() =>
+  import("./pages/Invoice/edit").then((module) => ({
+    default: module.EditInvoicePage,
+  }))
+)
+
 export default function App() {
   return (
     <Routes>
@@ -39,6 +45,7 @@ export default function App() {
       </Route>
       <Route element={<InvoiceLayout />}>
         <Route path="/invoice/new" element={<CreateInvoicePage />} />
+        <Route path="/invoice/edit/:id" element={<EditInvoicePage />} />
         <Route path="/invoice/:id" element={<InvoicePage />} />
       </Route>
     </Routes>

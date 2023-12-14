@@ -10,7 +10,7 @@ import {
 import { Card, CardContent } from "../../components/ui/Card"
 import { InvoiceStatusBadge } from "../../components/InvoiceStatusBadge"
 import { Skeleton } from "../../components/Skeleton"
-import { DotsHorizontalIcon } from "@radix-ui/react-icons"
+import { InvoiceActions } from "../../components/InvoiceActions"
 
 import { useAuth } from "../../contexts/AuthContext"
 import { Navigate, useParams } from "react-router-dom"
@@ -47,7 +47,8 @@ export function InvoicePage() {
           <Card>
             <CardContent className="flex-between pt-4">
               <InvoiceStatusBadge status={invoice.invoiceStatus} />
-              <DotsHorizontalIcon className="h-4 w-4" aria-hidden="true" />
+
+              <InvoiceActions invoiceId={invoice.id} isInvoicePage={true} />
             </CardContent>
           </Card>
 

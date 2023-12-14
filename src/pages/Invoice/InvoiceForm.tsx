@@ -32,6 +32,7 @@ import { Icons } from "../../components/Icons"
 import { cn } from "../../lib/utils"
 import { format } from "date-fns"
 import { Calendar } from "../../components/ui/Calendar"
+import { Invoice } from "../../types"
 
 const Total = ({
   control,
@@ -58,26 +59,31 @@ const Total = ({
 interface InvoiceFormProps {
   onSubmit: (values: InvoiceInputs) => void
   isPending: boolean
+  invoice?: Invoice
 }
 
-export function InvoiceForm({ onSubmit, isPending }: InvoiceFormProps) {
+export function InvoiceForm({
+  onSubmit,
+  isPending,
+  invoice,
+}: InvoiceFormProps) {
   const form = useForm<InvoiceInputs>({
     resolver: zodResolver(invoiceValidator),
     defaultValues: {
-      sellerStreetAddress: "",
-      sellerCountry: "",
-      sellerCity: "",
-      sellerPostCode: "",
-      clientName: "",
-      clientEmail: "",
-      clientStreetAddress: "",
-      clientCountry: "",
-      clientCity: "",
-      clientPostCode: "",
-      invoiceDate: undefined,
-      paymentTerms: "",
-      serviceDescription: "",
-      itemList: [],
+      sellerStreetAddress: invoice?.sellerStreetAddress || "",
+      sellerCountry: invoice?.sellerCountry || "",
+      sellerCity: invoice?.sellerCity || "",
+      sellerPostCode: invoice?.sellerPostCode || "",
+      clientName: invoice?.clientName || "",
+      clientEmail: invoice?.clientEmail || "",
+      clientStreetAddress: invoice?.clientStreetAddress || "",
+      clientCountry: invoice?.clientCountry || "",
+      clientCity: invoice?.clientCity || "",
+      clientPostCode: invoice?.clientPostCode || "",
+      invoiceDate: invoice?.invoiceDate.toDate(),
+      paymentTerms: invoice?.paymentTerms || "",
+      serviceDescription: invoice?.serviceDescription || "",
+      itemList: invoice?.itemList || [],
     },
   })
 

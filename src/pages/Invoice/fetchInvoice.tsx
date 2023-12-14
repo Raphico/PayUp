@@ -25,13 +25,11 @@ export const fetchInvoice = async (
     } else {
       throw new Error("Document doesn't exists")
     }
-
-    return undefined
   } catch (error) {
     error instanceof FirebaseError
       ? console.error(error.message)
       : console.error(error)
 
-    throw new Error("Unable to fetch recent invoices")
+    throw new Error("Unable to fetch invoice")
   }
 }
