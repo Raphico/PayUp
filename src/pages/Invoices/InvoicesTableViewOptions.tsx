@@ -3,6 +3,8 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../components/ui/DropdownMenu"
 
@@ -28,6 +30,11 @@ export function InvoicesTableViewOptions({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        <DropdownMenuLabel className="font-semibold">
+          Toggle columns
+        </DropdownMenuLabel>
+
+        <DropdownMenuSeparator />
         {columns.map(
           (column) =>
             column.canHide && (

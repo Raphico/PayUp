@@ -30,11 +30,12 @@ export function InvoicesTableFilter({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel className="text-muted">
+        <DropdownMenuLabel className="font-semibold">
           Filter by status
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
+
         {statuses.map((status) => (
           <DropdownMenuCheckboxItem
             key={status}
