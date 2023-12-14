@@ -61,6 +61,11 @@ export function InvoicesPage() {
       isVisible: true,
       canHide: true,
     },
+    {
+      id: "row actions",
+      header: "",
+      canHide: false,
+    },
   ])
 
   const hasPrevPage = pagination.pageIndex !== 0
@@ -100,7 +105,7 @@ export function InvoicesPage() {
   const toggleColumnVisibility = (columnId: string) => {
     setColumns((prevState) =>
       prevState.map((column) =>
-        column.id === columnId
+        column.id === columnId && column.canHide
           ? {
               ...column,
               isVisible: !column.isVisible,

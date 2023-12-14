@@ -16,6 +16,7 @@ import { ColumnDef } from "./schema"
 
 import { useNavigate } from "react-router-dom"
 import { InvoiceStatusBadge } from "../../components/InvoiceStatusBadge"
+import { InvoiceActions } from "../../components/InvoiceActions"
 
 interface InvoicesTableProps {
   invoices?: {
@@ -74,6 +75,14 @@ export function InvoicesTable({
                     {column.id === "amount" && formatCurrency(invoice.amount)}
                   </TableCell>
                 ))}
+                <TableCell>
+                  <InvoiceActions
+                    isDrafted={invoice.status === "drafted"}
+                    isInvoicePage={false}
+                    isMarkedAsPaid={invoice.status === "pending"}
+                    invoiceId={invoice.id}
+                  />
+                </TableCell>
               </TableRow>
             ))
           ) : (

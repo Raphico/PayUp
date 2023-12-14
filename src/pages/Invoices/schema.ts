@@ -10,9 +10,16 @@ export interface PaginationState {
   statusFilterValue?: InvoiceStatus
 }
 
-export interface ColumnDef {
-  id: string
-  header: string | JSX.Element
-  isVisible: boolean
-  canHide: boolean
-}
+export type ColumnDef =
+  | {
+      id: string
+      header: string | JSX.Element
+      canHide: true
+      isVisible: boolean
+    }
+  | {
+      id: string
+      header: string | JSX.Element
+      canHide: false
+      isVisible?: true
+    }
