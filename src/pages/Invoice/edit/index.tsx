@@ -9,7 +9,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useAuth } from "../../../contexts/AuthContext"
 import { catchError } from "../../../lib/utils"
 import { InvoiceInputs } from "../invoiceValidator"
-import { updateInvoice } from "../new/updateInvoice"
+import { updateInvoice } from "./updateInvoice"
 
 export function EditInvoicePage() {
   const navigate = useNavigate()
