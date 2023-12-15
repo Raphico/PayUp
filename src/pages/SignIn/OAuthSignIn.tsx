@@ -25,15 +25,12 @@ const oauthProviders = [
 export function OAuthSignIn() {
   const { signIn } = useAuth()
   const [isLoading, setIsLoading] = React.useState<OAuthStrategy | null>(null)
-  const navigate = useNavigate()
 
   const oauthSignIn = async (strategy: OAuthStrategy) => {
     try {
       setIsLoading(strategy)
 
       await signIn(strategy)
-
-      navigate("/dashboard")
     } catch (error) {
       setIsLoading(null)
       catchError(error)
