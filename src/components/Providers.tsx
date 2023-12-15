@@ -12,12 +12,12 @@ const queryClient = new QueryClient()
 export function Providers({ children }: ProvidersProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <ThemeProvider>
+      <ThemeProvider>
+        <AuthProvider>
           <Toaster position="top-center" richColors />
           {children}
-        </ThemeProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   )
 }

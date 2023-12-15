@@ -9,6 +9,7 @@ import {
 } from "firebase/auth"
 import { auth } from "../lib/firebase"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { Icons } from "../components/Icons"
 
 interface AuthProviderProps {
   children: React.ReactNode
@@ -91,7 +92,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         signIn,
       }}
     >
-      {!isLoading && children}
+      {isLoading ? (
+        <div className="min-h-screen w-full flex-center flex-col gap-2">
+          <Icons.logo className="h-10 w-10" />
+          <p className="text-muted">authenticating...</p>
+        </div>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   )
 }
