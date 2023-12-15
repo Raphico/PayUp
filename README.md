@@ -7,6 +7,7 @@ An invoice app built with react and firebase
 - **UI Library:** [React.js](https://react.dev)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
 - **User & Data Management:** [Firebase](https://firebase.google.com)
+- **Asynchronous state:** [Tanstack Query](https://tanstack.com/query/v5)
 - **Headless Components:** [radix/ui](https://radix-ui.com/)
 - **Form Validation:** [react-hook-form](https://react-hook-form.com/)
 - **Chart Library:** [rechart](https://recharts.org/)
