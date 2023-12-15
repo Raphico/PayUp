@@ -1,14 +1,16 @@
 import { AuthNav } from "./AuthNav"
+import { Card, CardContent } from "../../components/ui/Card"
+import { Icons } from "../../components/Icons"
 import { buttonVariants } from "../../components/ui/Button"
+
 import { Link } from "react-router-dom"
 import { cn } from "../../lib/utils"
-import { Icons } from "../../components/Icons"
 
 export function HomePage() {
   return (
     <>
       <AuthNav />
-      <main className="max-width y-paddings">
+      <main className="max-width y-paddings space-y-20">
         <section className="hero">
           <Link
             to="https://github.com/Raphico/payUp"
@@ -30,6 +32,75 @@ export function HomePage() {
             Get started
           </Link>
         </section>
+
+        <img src="/dashboard.png" alt="PayUp dashboard page" />
+
+        <section className="flex-center flex-col gap-8">
+          <h2 className="text-center text-2xl sm:text-3xl font-semibold">
+            Features
+          </h2>
+
+          <div className="grid gap-4 sm:grid-cols-2 max-w-4xl">
+            <Card>
+              <CardContent className="space-y-2 p-8">
+                <Icons.react
+                  className="h-10 w-10 text-white"
+                  aria-hidden="true"
+                />
+                <h3 className="text-lg font-semibold">React</h3>
+                <p className="text-muted">
+                  Client component, Context API, hooks, Code splitting.
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="space-y-2 p-8">
+                <Icons.database
+                  className="h-10 w-10 text-foreground"
+                  aria-hidden="true"
+                />
+                <h3 className="text-lg font-semibold">
+                  Firebase & Tanstack Query
+                </h3>
+                <p className="text-muted">
+                  User, Data & Asynchronous state management
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="space-y-2 p-8">
+                <Icons.component
+                  className="h-10 w-10 text-foreground"
+                  aria-hidden="true"
+                />
+                <h3 className="text-lg font-semibold">Components</h3>
+                <p className="text-muted">
+                  UI components built using Radix UI and styled with Tailwind
+                  CSS.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        <footer>
+          <p className="text-center">
+            Built by{" "}
+            <Link to="https://github.com/Raphico" className="underline">
+              Raphico
+            </Link>
+            . Hosted on{" "}
+            <Link to="https://vercel.com" className="underline">
+              Vercel
+            </Link>
+            . The source code is available on{" "}
+            <Link to="https://github.com/Raphico/payUp" className="underline">
+              Github
+            </Link>
+            .
+          </p>
+        </footer>
       </main>
     </>
   )
