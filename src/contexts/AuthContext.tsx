@@ -10,12 +10,15 @@ import {
 import { auth } from "../lib/firebase"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Icons } from "../components/Icons"
+import { useLocation } from "react-router-dom"
 
 interface AuthProviderProps {
   children: React.ReactNode
 }
 
 export type OAuthStrategy = "oauth_google" | "oauth_github"
+
+const authRequiredRoutes = ["/dashboard", "/invoice", "/invoices"]
 
 interface AuthContextProps {
   currentUser: User | null
@@ -36,6 +39,7 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const { pathname } = useLocation()
   const queryClient = useQueryClient()
 
   const [isLoading, setIsLoading] = React.useState(true)
@@ -84,6 +88,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return unSubscribe
   }, [queryClient])
 
+  const isAuthRequiredRoute = authRequiredRoutes.some((route) =>
+    pathname.startsWith(route)
+  )
+
   return (
     <AuthContext.Provider
       value={{
@@ -92,7 +100,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         signIn,
       }}
     >
-      {isLoading ? (
+      {isLoading && isAuthRequiredRoute ? (
         <div className="min-h-screen w-full flex-center flex-col gap-2">
           <Icons.logo className="h-10 w-10" />
           <p className="text-muted">authenticating...</p>
