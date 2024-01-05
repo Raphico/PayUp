@@ -102,7 +102,7 @@
   }
 
   .hero-subtitle {
-    @apply text-base sm:text-lg xl:text-xl text-muted max-w-x;
+    @apply text-base sm:text-lg xl:text-xl text-muted max-w-xl;
   }
 }
 
